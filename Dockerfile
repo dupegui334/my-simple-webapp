@@ -8,4 +8,6 @@ RUN apt-get update && \
     apt-get install -y python3 python3-pip && \
     pip install -r /opt/web-app/requirements.txt
 
-ENTRYPOINT python3 /opt/web-app/app.py
+WORKDIR /opt/web-app
+
+ENTRYPOINT FLASK_APP=app.py flask run --host=0.0.0.0

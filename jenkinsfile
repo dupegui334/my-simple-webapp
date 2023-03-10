@@ -14,7 +14,7 @@ pipeline {
         
         stage('Build checkout') {
             steps {
-                git 'git@github.com:dupegui334/my-simple-webapp.git'
+                git branch: 'main', credentialsId: 'git-clone', url: 'https://github.com/dupegui334/my-simple-webapp'
             }
         }
 
@@ -30,7 +30,9 @@ pipeline {
 
         stage('Testing - running in Jenkins master') {
             steps {
-                sh "docker run -d -p 5000:5000 --name ${JOB_NAME} ${img}' // The name of the container will be same of the job
+                sh "docker stop ${JOB_NAME}"
+                sh "docker rm ${JOB_NAME}"
+                sh "docker run -d -p 5000:5000 --name ${JOB_NAME} ${img}" // The name of the container will be same of the job
             }
         }
 

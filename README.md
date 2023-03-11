@@ -1,8 +1,8 @@
 # my-simple-webapp
 Personal DevOps project with web app in flask, docker, Terraform, AWS, Ansible and Jenkins.
 CI/CD using Jenkins pipeline to:
-    1. Build a docker image and push it to the hub.
-    2. Run the container based on the previous image (a Flask web application in port 5000).
+- Build a docker image and push it to the hub.
+- Run the container based on the previous image (a Flask web application in port 5000).
  All this, every time someone makes a commit or a PR to branch main
  
 ## Web app & docker

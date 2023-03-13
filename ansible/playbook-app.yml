@@ -1,0 +1,25 @@
+- hosts: all
+  become: true
+
+  tasks:
+  #   - name: log into docker hub registry
+  #     docker_login:
+  #       email: "your-email@address"
+  #       username: "a-dockerhub-username"
+  #       password: "a-dockerhub-password"
+
+    - name: Clone a github repository
+      git:
+        repo: https://github.com/dupegui334/my-simple-webapp.git
+        dest: /home/repositories
+        clone: yes
+        update: yes
+
+    # - name: ensure a container is running
+    #   docker_container:
+    #     name: app-container
+    #     state: started
+    #     image: "sdupegui/planet-app-linux"
+    #     pull: true
+    #     ports:
+    #       - "5000:5000"

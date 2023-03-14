@@ -9,13 +9,7 @@
         update_cache: yes
     when: ansible_distribution == "Amazon" #Run this task only if the distribution is AL.
 
-  # Install git
-  - name: install git
-    ansible.builtin.yum:
-      name: git
-
   # Install Docker
-
   - name: install prerequisites # sudo yum install docker
     ansible.builtin.yum:
       name:
@@ -40,3 +34,13 @@
       name:
         - docker
         - docker-compose
+
+  - name: Install requests lib
+    pip:
+      name: requests
+      state: present
+
+  - name: Install docker-py
+    pip:
+      name: docker-py
+      state: present

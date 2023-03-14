@@ -44,3 +44,17 @@
     pip:
       name: docker-py
       state: present
+
+  - name: Start docker
+    service:
+      name: docker
+      state: started
+
+  - name: Run container
+    docker_container:
+      name: app-container
+      state: started
+      image: "sdupegui/planet-app-linux:1.3"
+      pull: true
+      ports:
+        - "5000:5000"

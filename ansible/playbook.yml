@@ -1,0 +1,67 @@
+---
+- name: provision packages
+  hosts: all
+  
+  become: yes
+  tasks:
+
+  - name: update cache # sudo yum update
+    ansible.builtin.yum:
+        update_cache: yes
+    when: ansible_distribution == "Amazon" #Run this task only if the distribution is AL.
+
+  # Install Docker
+  - name: install prerequisites # sudo yum install docker
+    ansible.builtin.yum:
+      name:
+        - docker
+      update_cache: yes
+
+  - name: add user permissions
+    shell: "usermod -aG docker {{ ansible_env.SUDO_USER }}"
+
+  - name: Reset ssh connection for changes to take effect
+    meta: "reset_connection"
+
+  # Installs Docker SDK
+  - name: install python package manager
+    ansible.builtin.yum:
+      name: python3-pip
+  
+  - name: install python sdk
+    become_user: "{{ ansible_env.SUDO_USER }}"
+    pip:
+      name:
+        - docker
+        - docker-compose
+
+  - name: Install requests lib
+    pip:
+      name: requests
+      state: present
+
+  - name: Install docker-py
+    pip:
+      name: docker-py
+      state: present
+
+################
+
+- name: Start app
+  hosts: all
+  become: yes
+  tasks:
+
+  - name: Start docker
+    service:
+      name: docker
+      state: started
+
+  - name: Run container
+    docker_container:
+      name: app-container
+      state: started
+      image: "sdupegui/planet-app-linux:1.3"
+      pull: true
+      ports:
+        - "5000:5000"

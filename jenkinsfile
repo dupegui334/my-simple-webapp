@@ -6,7 +6,7 @@ pipeline {
         registry = 'sdupegui/planet-app-linux'
         registryCredential = 'docker-hub-login'
         dockerImage = ''
-        ANSIBLE_SSH_KEY=credentialsId:'ssh-app-server'
+        ANSIBLE_SSH_KEY=credentials('ssh-app-server')
     }
 
     agent any

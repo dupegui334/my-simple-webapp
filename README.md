@@ -21,3 +21,12 @@ Jenkins exposed in port 8080 by default. Create a pipeline job and in there sele
 
 ## Github
 Create a Github webhook and in the URL set the URL of: https//:Public-DNS/Jenkins-port/github-webhook/
+
+## Ansible
+Used to provision the packages that we need for run our application in remote hosts.
+- Inventory: Put there the user@public-ip of your host.
+- playbook-provision.yml: Tasks to install the packages required for the app in all the hosts.
+- To execute the playbook run in the ansible folder:
+   ```
+    sudo ansible-playbook --key-file ~/PATH-TO-KEY.pem -i inventory --ask-become-pass playbook-app.yml       
+   ```

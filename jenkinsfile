@@ -16,6 +16,8 @@ pipeline {
         stage('Build checkout') {
             steps {
                 git branch: 'main', credentialsId: 'git-clone', url: 'https://github.com/dupegui334/my-simple-webapp'
+                sh 'pwd'
+                sh 'whoami'
             }
         }
 
@@ -54,4 +56,4 @@ pipeline {
             }
         }
     }
-}
+  }

@@ -16,8 +16,6 @@ pipeline {
         stage('Build checkout') {
             steps {
                 git branch: 'main', credentialsId: 'git-clone', url: 'https://github.com/dupegui334/my-simple-webapp'
-                sh 'pwd'
-                sh 'whoami'
             }
         }
 
@@ -51,6 +49,9 @@ pipeline {
 
         stage('Run playbook') {
             steps {
+                sh 'pwd'
+                sh 'whoami'
+                sh 'sudo -i'
                 sh "cd ansible"
                 sh "ansible-playbook -i inventory --private-key=$ANSIBLE_SSH_KEY playbook.yml"
             }

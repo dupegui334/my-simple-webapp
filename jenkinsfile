@@ -52,7 +52,7 @@ pipeline {
         stage('Run playbook') {
             steps {
                 sh "cd ansible"
-                sh "ansible-playbook -i inventory --private-keys=$ANSIBLE_SSH_KEY playbook.yml"
+                sh "ansible-playbook -i inventory --private-key=$ANSIBLE_SSH_KEY playbook.yml"
             }
         }
     }

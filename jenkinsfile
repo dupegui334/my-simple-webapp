@@ -6,6 +6,7 @@ pipeline {
         registry = 'sdupegui/planet-app-linux'
         registryCredential = 'docker-hub-login'
         dockerImage = ''
+        ANSIBLE_SSH_KEY=credentialsId:'ssh-app-server'
     }
 
     agent any
@@ -48,6 +49,11 @@ pipeline {
             }
         }
 
+        stage('Run playbook') {
+            steps {
+                sh "cd ansible"
+                sh "ansible-playbook -i inventory --private-keys=$ANSIBLE_SSH_KEY playbook.yml"
+            }
+        }
     }
-    
-}
+  }

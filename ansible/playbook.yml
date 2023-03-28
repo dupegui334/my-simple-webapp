@@ -58,7 +58,7 @@
       state: started
 
   - name: Run container
-    docker_container:
+    community.docker.docker_container:
       name: app-container
       state: started
       image: "sdupegui/planet-app-linux:1.3"

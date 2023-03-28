@@ -49,10 +49,9 @@ pipeline {
 
         stage('Run playbook') {
             steps {
-                sh 'pwd'
                 sh 'whoami'
-                sh 'sudo -i'
                 sh "cd ansible"
+                sh 'pwd'
                 sh "ansible-playbook -i inventory --private-key=$ANSIBLE_SSH_KEY playbook.yml"
             }
         }

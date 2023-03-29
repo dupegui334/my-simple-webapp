@@ -49,7 +49,9 @@ pipeline {
 
         stage('Run playbook') {
             steps {
+
                 ansiblePlaybook credentialsId: 'ansible-user', disableHostKeyChecking: true, installation: 'ansible', inventory: 'ansible/inventory', playbook: 'ansible/playbook.yml'
+
             }
         }
     }

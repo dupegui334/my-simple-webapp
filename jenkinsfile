@@ -49,11 +49,7 @@ pipeline {
 
         stage('Run playbook') {
             steps {
-                dir('./ansible') {
-                    sh "pwd"
-                    sh "ansible-playbook -i inventory --private-key=$ANSIBLE_SSH_KEY ./playbook.yml"
-                }
-
+                ansiblePlaybook credentialsId: 'ansible-user', disableHostKeyChecking: true, installation: 'ansible', inventory: 'ansible/inventory', playbook: 'ansible/playbook.yml'
             }
         }
     }

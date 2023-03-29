@@ -49,6 +49,7 @@ pipeline {
 
         stage('Run playbook') {
             steps {
+
                 sh 'pwd'
                 sh 'whoami'
                 sh 'sudo -i'
@@ -58,3 +59,4 @@ pipeline {
         }
     }
   }
+

@@ -8,7 +8,7 @@
   - name: update cache # sudo yum update
     ansible.builtin.yum:
         update_cache: yes
-    when: ansible_distribution == "Amazon" #Run this task only if the distribution is AL.
+    when: ansible_distribution == "Amazon" #Run this task only if the distribution is Amazon Linux.
 
   # Install Docker
   - name: install prerequisites # sudo yum install docker
@@ -17,13 +17,13 @@
         - docker
       update_cache: yes
 
-  - name: add user permissions
+  - name: add user permissions # Add sudo user to docker group
     shell: "usermod -aG docker {{ ansible_env.SUDO_USER }}"
 
   - name: Reset ssh connection for changes to take effect
     meta: "reset_connection"
 
-  # Installs Docker SDK
+  # Install Docker SDK
   - name: install python package manager
     ansible.builtin.yum:
       name: python3-pip
@@ -35,7 +35,7 @@
         - docker
         - docker-compose
 
-  - name: Install requests lib
+  - name: Install requests lib 
     pip:
       name: requests
       state: present

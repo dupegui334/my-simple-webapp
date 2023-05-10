@@ -31,6 +31,7 @@
   - name: install python sdk
     become_user: "{{ ansible_env.SUDO_USER }}"
     pip:
+      executable: /usr/bin/pip3
       name:
         - docker
         - docker-compose

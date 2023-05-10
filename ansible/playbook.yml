@@ -37,7 +37,7 @@
 
   - name: Install requests lib 
     pip:
-      name: requests
+      name: requests==2.28.2
       state: present
 
   - name: Install docker-py

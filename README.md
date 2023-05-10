@@ -24,7 +24,7 @@ Create a Github webhook and in the URL set the URL of: https//:Public-DNS/Jenkin
 
 ## Terraform
 Used to declare the infrastructure as a code of the AWS resources used for the application:
-- Create ssh private key and public key for EC2 (The same used for Ansible when running the playbook)
+- Create ssh private key and public key for EC2 (The same used later for Ansible when running the playbook)
 - Amazon Linux EC2 instance where flask will be running the app.
 - Security group.
 - To create the infrastructure run the following command in terraform folder:

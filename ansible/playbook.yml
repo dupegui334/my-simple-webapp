@@ -38,11 +38,13 @@
 
   - name: Install requests lib 
     pip:
+      executable: /usr/bin/pip3
       name: requests==2.28.2
       state: present
 
   - name: Install docker-py
     pip:
+      executable: /usr/bin/pip3
       name: docker-py
       state: present
 

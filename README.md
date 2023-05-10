@@ -10,17 +10,29 @@ Web app designed with Flask where the user search for the name of a planet of th
 - Exposes through port 5000.
 - to execute container locally run: 
     ```
-    docker run -d -p 5000:5000 sdupegui/planet-app:latest
+    docker run -d -p 5000:5000 sdupegui/planet-app:1.3
     ```
     
 ## Jenkins
 Jenkins exposed in port 8080 by default. Create a pipeline job and in there select the Github integrations:
 - Pipeline script from SCM and Github hook trigger.
 - Set the credentials for docker hub login
-- Set the credential to clone github repository (if it´s private).
+- Set the credential to clone github repository (if it's private).
 
 ## Github
 Create a Github webhook and in the URL set the URL of: https//:Public-DNS/Jenkins-port/github-webhook/
+
+## Terraform
+Used to declare the infrastructure as a code of the AWS resources used for the application:
+- Create ssh private key and public key for EC2 (The same used for Ansible when running the playbook)
+- Amazon Linux EC2 instance where flask will be running the app.
+- Security group.
+- To create the infrastructure run the following command in terraform folder:
+    ```
+    terraform init
+    terraform plan
+    terraform apply    
+    ```
 
 ## Ansible
 Used to provision the packages that we need for run our application in remote hosts.
@@ -28,5 +40,6 @@ Used to provision the packages that we need for run our application in remote ho
 - playbook-provision.yml: Tasks to install the packages required for the app in all the hosts.
 - To execute the playbook run in the ansible folder:
    ```
-    sudo ansible-playbook --key-file ~/PATH-TO-KEY.pem -i inventory --ask-become-pass playbook-app.yml       
+    sudo ansible-playbook --key-file ~/PATH-TO-KEY.pem -i inventory --ask-become-pass playbook.yml       
    ```
+

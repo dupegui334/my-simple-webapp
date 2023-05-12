@@ -1,6 +1,6 @@
 ---
 - name: provision packages
-  hosts: all
+  hosts: webserver
   
   become: yes
   tasks:

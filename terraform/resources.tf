@@ -9,6 +9,17 @@ resource "aws_instance" "ec2-webapp" {
   vpc_security_group_ids = [data.aws_security_group.app-sg.id]
 }
 
+resource "local_file" "ansible_inventory" {
+  depends_on = [aws_instance.ec2-webapp]
+
+  content = <<-EOT
+    [webserver]
+    ec2-webapp ansible_host="${aws_instance.ec2-webapp.public_ip}" ansible_user="ec2-user"
+    EOT
+
+  filename = "../ansible/inventory"
+}
+
 data "aws_key_pair" "web-app-key" {
   key_name = "centos-ec2"
 }

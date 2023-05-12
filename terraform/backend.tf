@@ -3,6 +3,7 @@ terraform {
     bucket = "tf-state-david"
     key    = "web-app-tfstate/terraform.tfstate"
     region = "us-east-1"
+    dynamodb_table = "web-app-lock"
   }
 }
 

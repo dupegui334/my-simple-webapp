@@ -7,6 +7,8 @@ pipeline {
         registryCredential = 'docker-hub-login'
         dockerImage = ''
         ANSIBLE_SSH_KEY=credentials('ssh-app-server')
+        AWS_ACCESS_KEY_ID     = credentials('aws_access_key_id')
+        AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')
     }
 
     agent any
@@ -44,6 +46,13 @@ pipeline {
                         dockerImage.push()
                     }
                 }
+            }
+        }
+
+        stage('Terraform init') {
+            steps {
+                sh '(cd terraform; pwd; ls; terraform init)'
+                sh '(terraform apply --auto-approve)'
             }
         }
 

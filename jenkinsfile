@@ -52,7 +52,13 @@ pipeline {
         stage('Terraform init') {
             steps {
                 sh '(cd terraform; pwd; ls; terraform init)'
-                sh '(terraform apply --auto-approve)'
+                script {
+                    if ( env.action == 'apply') {
+                        sh 'cd terraform; terraform apply --auto-approve'
+                    } else if ( env.action == 'destroy') {
+                        sh 'cd terraform; terraform destroy --target=aws_instance.ec2-webapp --auto-approve'
+                    }
+                }
             }
         }
 

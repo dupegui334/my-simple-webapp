@@ -14,10 +14,18 @@ Web app designed with Flask where the user search for the name of a planet of th
     ```
     
 ## Jenkins
-Jenkins exposed in port 8080 by default. Create a pipeline job and in there select the Github integrations:
-- Pipeline script from SCM and Github hook trigger.
+Jenkins exposed in port 8080 by default. Create a pipeline job and in there select: 
+- Select choice parameters
+- Github integrations: Pipeline script from SCM and Github hook trigger.
 - Set the credentials for docker hub login
 - Set the credential to clone github repository (if it's private).
+- Set AWS credentials so Terraform can provision/delete resources and manage the backend.
+- Install suggested plugins and: 
+  - CloudBees Docker Build and Publish plugin
+  - Docker Pipeline
+  - Ansible plugin
+  - Terraform plugin
+
 
 ## Github
 Create a Github webhook and in the URL set the URL of: https//:Public-DNS/Jenkins-port/github-webhook/
@@ -27,18 +35,20 @@ Used to declare the infrastructure as a code of the AWS resources used for the a
 - Create ssh private key and public key for EC2 (The same used later for Ansible when running the playbook)
 - Amazon Linux EC2 instance where flask will be running the app.
 - Security group.
-- To create the infrastructure run the following command in terraform folder:
+- To create the infrastructure manually run the following command in terraform folder:
     ```
     terraform init
     terraform plan
-    terraform apply    
+    terraform apply
+    terraform destroy # To destroy all
+    terraform destroy --target=aws_instance.ec2-webapp # To destroy only the ec2 (app)
     ```
 
 ## Ansible
 Used to provision the packages that we need for run our application in remote hosts.
 - Inventory: Put there the user@public-ip of your host.
 - playbook-provision.yml: Tasks to install the packages required for the app in all the hosts.
-- To execute the playbook run in the ansible folder:
+- To manually execute the playbook run in the ansible folder:
    ```
     sudo ansible-playbook --key-file ~/PATH-TO-KEY.pem -i inventory --ask-become-pass playbook.yml       
    ```

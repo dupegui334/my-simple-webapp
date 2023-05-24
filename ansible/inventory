@@ -1,2 +1,2 @@
 [webserver]
-ec2-webapp ansible_host="3.86.236.224" ansible_user="ec2-user"
+ec2-webapp ansible_host="3.80.157.236" ansible_user="ec2-user"

@@ -15,8 +15,7 @@ pipeline {
         choice(
             choices: ['apply', 'destroy'],
             description: 'Select what terraform should do with the infrastructure',
-            name: 'action',
-            defaultValue: 'apply'
+            name: 'action'
         )
     }
 

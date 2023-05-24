@@ -1,8 +1,10 @@
 # my-simple-webapp Runbook
-Personal DevOps project with web app in flask, docker, Terraform, AWS, Ansible and Jenkins.
+Personal DevOps project with web app in flask, Docker, Terraform, AWS, Ansible and Jenkins.
 CI/CD using Jenkins pipeline to:
 - Build a docker image and push it to the hub.
 - Run the container based on the previous image (a Flask web application in port 5000).
+- Provision with terraform all the AWS resources needed for the app and the Ansible inventory. (A delete option is also provided when running the job manually in Jenkins)
+- Provision all packages and run required processes to start app in the host using Ansible
  All this, every time someone makes a commit or a PR to branch main
  
 ## Web app & docker

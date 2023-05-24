@@ -11,6 +11,15 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')
     }
 
+    parameters {
+        choice(
+            choices: ['apply', 'destroy'],
+            description: 'Select what terraform should do with the infrastructure',
+            name: 'action',
+            defaultValue: 'apply'
+        )
+    }
+
     agent any
 
     stages {

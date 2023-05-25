@@ -3,9 +3,11 @@ Personal DevOps project with web app in flask, Docker, Terraform, AWS, Ansible a
 CI/CD using Jenkins pipeline to:
 - Build a docker image and push it to the hub.
 - Run the container based on the previous image (a Flask web application in port 5000).
-- Provision with terraform all the AWS resources needed for the app and the Ansible inventory. (A delete option is also provided when running the job manually in Jenkins)
-- Provision all packages and run required processes to start app in the host using Ansible
- All this, every time someone makes a commit or a PR to branch main
+- Provision with terraform all the AWS resources needed for the app and the Ansible inventory. (A delete option is also provided when running the job manually in Jenkins).
+- Provision all packages and run required processes to start app in the host using Ansible.
+
+All this, every time someone makes a commit or a PR to branch main.
+![diagram](images/flask-web-app.jpg)
  
 ## Web app & docker
 Web app designed with Flask where the user search for the name of a planet of the solar system and the app will retrieve all the info of the planet comming from the [API](https://api.le-systeme-solaire.net/swagger/)

@@ -88,3 +88,5 @@ Prometheus and Grafana
     ![metrics](./images/metrics.png)
     - Go to explore, then select prometheus and you can start exploring all metrics from node:
     ![explore](./images/explore.png)
+    - You can create a dashboard with variables to monitor:
+     ![grafana](./images/grafana.png)
